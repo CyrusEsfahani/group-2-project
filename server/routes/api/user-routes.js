@@ -1,4 +1,4 @@
-import { User } from '../../models';
+import { User } from '../../models/index.js';
 import express from 'express';
 
 const router = express.Router();
@@ -78,4 +78,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-module.exports = { userRouter: router };
+export default router;
