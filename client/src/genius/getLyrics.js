@@ -1,8 +1,8 @@
-const searchSong = require('./searchSong');
-const { checkOptions } = require('./utils');
-const extractLyrics = require('./genius/extractLyrics');
+import searchSong from './searchSong.js';
+import { checkOptions } from './utils';
+import extractLyrics from './genius/extractLyrics';
 
-module.exports = async function (arg) {
+export default async function (arg) {
 	try {
 		if (arg && typeof arg === 'string') {
 			let lyrics = await extractLyrics(arg);

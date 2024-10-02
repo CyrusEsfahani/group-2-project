@@ -1,10 +1,9 @@
-const axios = require('axios');
-const extractLyrics = require('./genius/extractLyrics');
+import axios from 'axios';
+import extractLyrics from './genius/extractLyrics';
 
 const url = 'https://api.genius.com/songs/';
 
-
-module.exports = async function (id, apiKey) {
+export default async function (id, apiKey) {
 	if (!id) throw 'No id was provided';
 	if (!apiKey) throw 'No apiKey was provided';
 	try {

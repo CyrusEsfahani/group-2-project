@@ -1,9 +1,9 @@
-const axios = require('axios');
-const { checkOptions, getTitle } = require('./utils');
+import axios from 'axios';
+import { checkOptions, getTitle } from './utils';
 
 const searchUrl = 'https://api.genius.com/search?q=';
 
-module.exports = async function (options) {
+export default async function (options) {
 	try {
 		checkOptions(options);
 		let { apiKey, title, artist, optimizeQuery = false, authHeader = false } = options;
