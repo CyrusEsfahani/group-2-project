@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 
-
 export const authenticateToken = (
-  req,
+  req, 
   res,
   next
+ 
 ) => {
   const authHeader = req.headers.authorization;
 
@@ -18,10 +18,11 @@ export const authenticateToken = (
         return res.sendStatus(403); // Forbidden
       }
 
-      req.user = user;
+      req.user = user 
       return next();
     });
   } else {
     res.sendStatus(401); // Unauthorized
   }
 };
+

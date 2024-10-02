@@ -1,3 +1,4 @@
+import { Outlet, Link } from 'react-router-dom'
 
 
 
@@ -6,7 +7,12 @@ function App() {
 
   return (
     <>
-      <h1>hello world</h1>
+      <nav>
+        <Link to="/login">Login</Link>
+        <Link to="/signup">Sign Up</Link>
+      </nav>
+      <Outlet />
+
     </>
   )
 }

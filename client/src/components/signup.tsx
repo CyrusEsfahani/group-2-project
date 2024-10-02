@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-const Signup = () => {
+const SignUp = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await axios.post('/api/auth/signup', formData);
       console.log(res.data);
     } catch (error) {
-      console.error(error.response.data);
+      console.error((error as any).response.data);
     }
   };
 
@@ -28,4 +28,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignUp;
