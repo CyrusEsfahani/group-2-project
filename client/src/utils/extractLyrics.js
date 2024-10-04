@@ -1,7 +1,7 @@
 import axios from 'axios';
-const cheerio = require('cheerio-without-node-native');
+import * as cheerio from 'cheerio';
 
-exports = async function (url) {
+export default async function (url) {
 	try {
 		let { data } = await axios.get(url);
 		const $ = cheerio.load(data);

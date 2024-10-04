@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { checkOptions, getTitle } from './utils';
+import { checkOptions, getTitle } from '../utils/index.js';
 
 const searchUrl = 'https://api.genius.com/search?q=';
 

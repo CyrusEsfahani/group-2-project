@@ -1,6 +1,6 @@
 import searchSong from './searchSong.js';
-import { checkOptions } from './utils';
-import extractLyrics from './genius/extractLyrics';
+import { checkOptions } from '../utils/index.js';
+import extractLyrics from '../utils/extractLyrics.js';
 
 export default async function (arg) {
 	try {

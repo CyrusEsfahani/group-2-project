@@ -1,4 +1,4 @@
-const checkOptions = (options) => {
+export const checkOptions = (options) => {
 	let { apiKey, title, artist } = options;
 	if (!apiKey) {
 		throw '"apiKey" property is missing from options';
@@ -9,7 +9,7 @@ const checkOptions = (options) => {
 	}
 };
 
-const getTitle = (title, artist) => {
+export const getTitle = (title, artist) => {
 	return `${title} ${artist}`
 		.toLowerCase()
 		.replace(/ *\([^)]*\) */g, '')
@@ -19,4 +19,4 @@ const getTitle = (title, artist) => {
 		.trim();
 };
 
-export default { checkOptions, getTitle };
+// export default { checkOptions, getTitle };
