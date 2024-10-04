@@ -1,20 +1,13 @@
 import { type FormEvent, useState, useEffect } from 'react';
+import { Track } from './interfaces/Track';
+import { Review } from './interfaces/Review';
+import ReviewModal from './components/ReviewModal';
 
 // client details for .env
 const CLIENT_ID = "b2d05a20bd4941eb9dbb80d3244de974";
 const CLIENT_SECRET = "3abe7e0378a94c2285d4c8a70fda61eb";
 
-// interface for the track object for interface file
-interface Track {
-  id: string;
-  trackName: string;
-  albumName: string;
-  artistName: string;
-  playerUri: string;
-  albumImageUrl: string;
-}
-
-// search for 5 tracks from the spotify API and returns an array of 5 track objects for API file
+// searches for 5 tracks according to the search query and returns them as an array of Track objects
 const searchForTrackAPI = async (accessToken: string, searchInput: string) => {
   const trackParameters = {
     method: 'GET',
@@ -23,7 +16,7 @@ const searchForTrackAPI = async (accessToken: string, searchInput: string) => {
       'Authorization': 'Bearer ' + accessToken,
     },
   };
-
+  
   const trackData = await fetch(`https://api.spotify.com/v1/search?q=${searchInput}&type=track`, trackParameters)
     .then(response => response.json())
     .then(data => data.tracks.items.slice(0, 5))
@@ -45,11 +38,17 @@ const searchForTrackAPI = async (accessToken: string, searchInput: string) => {
   }
 };
 
+// Track Search Page
 function TrackSearch() {
   const [searchInput, setSearchInput] = useState<string>(''); // search input
   const [accessToken, setAccessToken] = useState<string>(''); // Spotify access token
   const [tracks, setTracks] = useState<Track[]>([]); // search results array
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null); // user's selection
+  const [showReviewModal, setShowReviewModal] = useState<boolean>(false); // modal visibility
+  const [reviews, setReviews] = useState<Review[]>([]); // store reviews
+
+  // Placeholder userId, replace this with actual userId logic
+  const userId = 'user123';
 
   // Generates Spotify API Key when search page opens
   useEffect(() => {
@@ -80,10 +79,19 @@ function TrackSearch() {
     }
   };
 
-  // Handling for when the users selects a track from the search results (This is where future stuff will happen)
+  // Handling for when the user selects a track from the search results
   const handleTrackSelection = async (trackPick: Track) => {
     const track = tracks.find((t) => t === trackPick);
-    if (track) setSelectedTrack(track); // For now, the user's selection is just displayed
+    if (track) {
+      setSelectedTrack(track); // Displays selected track (Testing Reasons)
+      setShowReviewModal(true); // Shows modal when track is selected
+    }
+  };
+
+  // Handles review submission
+  const handleReviewSubmit = (review: Review) => {
+    setReviews([...reviews, review]); // Stores the submitted review
+    setShowReviewModal(false); // Closes modal after submission
   };
 
   return (
@@ -126,16 +134,32 @@ function TrackSearch() {
           <h3>Now Playing:</h3>
           <p>{selectedTrack.trackName} - {selectedTrack.albumName} by {selectedTrack.artistName}</p>
           <img src={selectedTrack.albumImageUrl} alt={`${selectedTrack.albumName} cover`} width="50" height="50" />
-          {/* Commented Out Audio Player (I know we are gonna use it later, I just dont want to lose the code for now) */}
-          {/*<iframe
-            src={`https://open.spotify.com/embed/track/${selectedTrack.playerUri.split(':')[2]}`}
-            width="300"
-            height="80"
-            frameBorder="0"
-            allowTransparency={true}
-            allow="encrypted-media"
-            title="Spotify Player"
-          ></iframe>*/}
+        </div>
+      )}
+
+      {/* Review Modal */}
+      {showReviewModal && selectedTrack && (
+        <ReviewModal
+          selectedTrack={selectedTrack}
+          onClose={() => setShowReviewModal(false)}
+          onSubmitReview={handleReviewSubmit}
+          userId={userId}
+        />
+      )}
+
+      {/* Displays All User Reviews (Testing)*/}
+      {reviews.length > 0 && (
+        <div>
+          <h3>All Reviews:</h3>
+          <ul>
+            {reviews.map((review, index) => (
+              <li key={index}>
+                <p>Song ID: {review.songId}</p>
+                <p>Rating: {review.rating}/10</p>
+                <p>Comment: {review.comment}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
@@ -143,3 +167,5 @@ function TrackSearch() {
 }
 
 export default TrackSearch;
+
+
