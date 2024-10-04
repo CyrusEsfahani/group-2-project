@@ -5,6 +5,7 @@ import App from './App.tsx'
 import Login from './components/Login.tsx'
 import SignUp from './components/SignUp.tsx'
 import Home from './components/Home.tsx'
+import ReviewPage from './components/ReviewPage.tsx'
 
 
 const router= createBrowserRouter([{
@@ -24,7 +25,10 @@ const router= createBrowserRouter([{
       index: true,
       element: <Home />
     },
-
+    {
+      path: 'review/:id', // Add the review page route
+      element: <ReviewPage />
+    }
   ],
 
 }]) 
