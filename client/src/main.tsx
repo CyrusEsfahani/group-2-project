@@ -5,6 +5,7 @@ import App from './App.tsx'
 import Login from './components/Login.tsx'
 import SignUp from './components/SignUp.tsx'
 import Home from './components/Home.tsx'
+import { UserProvider } from './context/UserContext.tsx'
 import ReviewPage from './components/ReviewPage.tsx'
 
 
@@ -36,6 +37,9 @@ const router= createBrowserRouter([{
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <UserProvider>
    <RouterProvider router={router} />
+   </UserProvider>
+  
   </StrictMode>
-)
+);

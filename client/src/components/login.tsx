@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../context/UserContext.tsx';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { setIsLoggedIn } = React.useContext(UserContext);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await axios.post('/api/login', { email, password });
+      setIsLoggedIn(true);
       navigate('/');
     } catch (error) {
       console.error('Error logging in:', error);
     }
   };
 
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900">
       <div className="w-full max-w-md p-8 space-y-8 bg-gray-800 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-center text-white">Log in to Spotify</h2>
+        <h2 className="text-3xl font-bold text-center text-white">Log In</h2>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="rounded-md shadow-sm">
             <div>
