@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import TrackSearch from '../components/TrackSearch';
 import axios from 'axios';
 
 interface User {
@@ -18,6 +19,7 @@ const Home: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,24 +34,20 @@ const Home: React.FC = () => {
       .catch(error => console.error('Error fetching reviews:', error));
   }, []);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Implement search functionality here
-    console.log('Searching for:', searchQuery);
-  };
-
   return (
     <div>
       <h1>Welcome to the Home Page</h1>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search music, lyrics, artists..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
+      {/* Search Bar Functionality */}
+      <p onClick={() => setShowSearchModal(true)} style={{ cursor: 'pointer', color: 'blue' }}>
+        Search Bar
+      </p>
+
+      {showSearchModal && (
+        <div>
+          <TrackSearch onClose={() => setShowSearchModal(false)} />
+        </div>
+      )}
+
       {user && (
         <div>
           <h2>User Info</h2>
