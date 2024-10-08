@@ -1,5 +1,5 @@
 import { type JwtPayload, jwtDecode } from 'jwt-decode';
-import type { UserData } from '../interfaces/userdata.tsx';
+import type { UserData } from '../interfaces/UserData.tsx';
 
 interface AuthService {
     id: string;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Review } from '../interfaces/Review';
+import { Review } from '../interfaces/Review.tsx';
 
 const ReviewPage = () => {
   const location = useLocation();
