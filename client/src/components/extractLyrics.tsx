@@ -23,45 +23,45 @@ import Auth from '../utils/auth';
 import { useEffect, useState } from 'react';
 
 
-interface lyricsProps{
+interface lyricsProps {
   title: string,
   artist: string,
 }
-export default function extractLyrics({title, artist}:lyricsProps){
+export default function extractLyrics({ title, artist }: lyricsProps) {
   const [lyricsUrl, setLyricsUrl] = useState<string | null>(null);
   console.log(title, artist);
-  const fetch_lyrics = async()=>{
-     try {
-       // Construct the Genius search API URL
-       //const searchUrl = `https://api.genius.com/search?q=${encodeURIComponent(
-       const data = {
-          title: title,
-          artist: artist,
-       }
+  const fetch_lyrics = async () => {
+    try {
+      // Construct the Genius search API URL
+      //const searchUrl = `https://api.genius.com/search?q=${encodeURIComponent(
+      const data = {
+        title: title,
+        artist: artist,
+      }
 
-       // Make the request to the Genius API to search for the song
-       const response = await axios.post('/api/reviews/lyrics', data, {
-         headers: {
-           Authorization: `Bearer ${Auth.getToken()}`,
-         },
-       });
+      // Make the request to the Genius API to search for the song
+      const response = await axios.post('/api/reviews/lyrics', data, {
+        headers: {
+          Authorization: `Bearer ${Auth.getToken()}`,
+        },
+      });
 
-       //const hits = response.data.response.hits;
-       //console.log(hits);
-       setLyricsUrl(response.data.lyrics);
-     } catch (error) {
-       console.error("Error fetching lyrics from Genius:", error);
-       return null;
-     }
+      //const hits = response.data.response.hits;
+      //console.log(hits);
+      setLyricsUrl(response.data.lyrics);
+    } catch (error) {
+      console.error("Error fetching lyrics from Genius:", error);
+      return null;
+    }
   }
   useEffect(() => {
     fetch_lyrics()
   });
   return (
     <div>
-    <a href={lyricsUrl ?? ''} target="_blank" rel="noreferrer">
-      View Lyrics
-    </a>
+      <a href={lyricsUrl ?? ''} target="_blank" rel="noreferrer">
+        View Lyrics
+      </a>
     </div>
   )
 }
