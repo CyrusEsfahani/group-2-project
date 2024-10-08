@@ -5,6 +5,7 @@ import App from './App.tsx'
 import Login from './components/login.tsx'
 import SignUp from './components/signup.tsx'
 import TrackSearch from './TrackSearch.tsx'
+import { UserProvider } from './context/UserContext.tsx'
 
 const router= createBrowserRouter([{
   path: '/',
@@ -30,6 +31,9 @@ const router= createBrowserRouter([{
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+  <UserProvider>
    <RouterProvider router={router} />
+  </UserProvider>
+ 
   </StrictMode>
-)
+);
