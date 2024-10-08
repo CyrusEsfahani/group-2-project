@@ -12,7 +12,7 @@ const Login: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('/api/login', { email, password });
+      await axios.post('/auth/login', { email, password });
       setIsLoggedIn(true);
       navigate('/');
     } catch (error) {

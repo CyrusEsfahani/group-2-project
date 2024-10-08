@@ -5,6 +5,7 @@ import { expressjwt as jwt } from "express-jwt"; // Corrected import for express
 import dotenv from "dotenv";
 import jwksRsa from "jwks-rsa";
 import routes from "./routes/index.js";
+import sequelize from "./db/connection.js";
 
 dotenv.config();
 // Create Express app
@@ -40,8 +41,19 @@ app.use(routes);
 
 // Start the server
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+
+// Newly added code 
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (_req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+  });
+}
+
+sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+  console.log("Database connected");
 });
 
 // Express JWT: Add email to access token
