@@ -1,7 +1,7 @@
 import { type FormEvent, useState, useEffect } from 'react';
 import { Track } from './interfaces/Track';
 import { Review } from './interfaces/Review';
-import ReviewModal from './components/ReviewModal';
+//import ReviewModal from './components/ReviewModal';
 //import AuthService from './utils/auth';
 import  getLyrics  from './genius/getLyrics'
 

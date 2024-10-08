@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Review } from '../interfaces/Review';
+import ExtractLyrics from './extractLyrics';
 
 const ReviewPage = () => {
   const location = useLocation();
@@ -38,6 +39,7 @@ const ReviewPage = () => {
 
   return (
     <div>
+      <ExtractLyrics title={track.trackName} artist = {track.artistName}/>
       <h3>Review {track.trackName} - {track.albumName}</h3>
       <img src={track.albumImageUrl} alt={track.albumName} width="50" height="50" />
       <label>
