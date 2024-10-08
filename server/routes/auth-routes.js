@@ -4,23 +4,24 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 export const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   const user = await User.findOne({
-    where: { username },
+    where: { email },
   });
   if (!user) {
     return res.status(401).json({ message: 'Authentication failed' });
   }
-
   const passwordIsValid = await bcrypt.compare(password, user.password);
   if (!passwordIsValid) {
     return res.status(401).json({ message: 'Authentication failed' });
   }
-
+  
+  const id = user.dataValues.id;
+  const username = user.dataValues.username;
   const secretKey = process.env.JWT_SECRET_KEY || '';
 
-  const token = jwt.sign({ username }, secretKey, { expiresIn: '8h' });
+  const token = jwt.sign({ email, id, username }, secretKey, { expiresIn: '8h' });
   return res.json({ token });
 };
 

@@ -3,9 +3,9 @@
 // //import searchSong from '../../client/src/genius/searchSong.js';
 // import songById from '../../client/src/genius/songById.js';
 // import sequelize from '../config/connection.js';
-// import User from './user.js';
+import User from './user.js';
 
-// export { User };
+export { User };
 // export { getLyrics };
 // export {getSong};
 // export {searchSong};

@@ -60,6 +60,7 @@ function TrackSearch({ onClose }: TrackSearchProps) {
           value={searchInput}
           placeholder="Enter a track name"
           onChange={(e) => setSearchInput(e.target.value)}
+          style={{color: 'black'}}
         />
         <button type="submit">Search</button>
       </form>
