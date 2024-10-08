@@ -1,16 +1,10 @@
 import express from "express";
 import axios from "axios";
+//import { Song } from "../../models/index.js";
 const router = express.Router();
 
 const fetch_lyrics = async (title, artist) => {
 console.log(title, artist);
-// function extractLyricsFromHtml(htmlContent) {
-//   //console.log(htmlContent);
-//   // Example: Extracting lyrics using Cheerio or Regex from HTML
-//   const regex = /<div class="lyrics">([^<]+)<\/div>/; // Regex to match lyrics in HTML
-//   const matches = htmlContent.match(regex);
-//   return matches ? matches[1] : null;
-// }
 
   try {
     // Construct the Genius search API URL
@@ -46,5 +40,18 @@ router.post('/lyrics', async (req, res) => {
   res.json({ lyrics });
 });
 
+router.post('/history', async (req, res)=>{
+    try {
+        const song = await Song.create({...req.body, userId: req.user.id, songId: req.body.id});
+        res.json(song);
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({message: 'Server error'});
+    }
+}
+)
 
 export default router;
+
+// /api/reviews/history

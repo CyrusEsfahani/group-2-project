@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Review } from '../interfaces/Review';
 import ExtractLyrics from './extractLyrics';
@@ -24,10 +24,11 @@ const ReviewPage = () => {
     console.log("Review comment: " + review.comment);
     console.log("");
     console.log("Song id: " + track.id);
+    // TrackId is the foreign key in the Review table
     console.log("Song trackName: " + track.trackName);
     console.log("Song albumName: " + track.albumName);
     console.log("Song artistName: " + track.artistName);
-    console.log("Song playerUri: " + track.playerUri);
+    //console.log("Song playerUri: " + track.playerUri); not needed
     console.log("Song albumImageUrl: " + track.albumImageUrl);
     // Handle storing the review, e.g., update state or API call
     navigate('/'); // Redirect back to home after submitting

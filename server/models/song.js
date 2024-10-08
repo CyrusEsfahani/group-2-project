@@ -10,7 +10,7 @@ Song.init(
     trackName: { type: DataTypes.STRING, allowNull: false },
     artistName: { type: DataTypes.STRING, allowNull: false },
     albumName: { type: DataTypes.STRING, allowNull: true },
-    imageUrl: { type: DataTypes.STRING, allowNull: true },
+    albumImageUrl: { type: DataTypes.STRING, allowNull: true },
     playerUri: { type: DataTypes.STRING, allowNull: true }, // e.g., Spotify URI
   },
   {
@@ -22,3 +22,4 @@ Song.init(
 );
 
 module.exports = Song;
+
