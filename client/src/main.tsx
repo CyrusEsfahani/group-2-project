@@ -2,8 +2,9 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.tsx'
-import Login from './components/Login.tsx'
-import SignUp from './components/SignUp.tsx'
+import Login from './components/login.tsx'
+import SignUp from './components/signup.tsx'
+import TrackSearch from './TrackSearch.tsx'
 
 const router= createBrowserRouter([{
   path: '/',
@@ -17,6 +18,10 @@ const router= createBrowserRouter([{
     {
       path: '/signup',
       element: <SignUp />,
+    },
+    {
+      path: '/tracksearch',
+      element: <TrackSearch />,
     }
   ],
 

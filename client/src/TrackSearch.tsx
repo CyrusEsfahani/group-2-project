@@ -2,10 +2,13 @@ import { type FormEvent, useState, useEffect } from 'react';
 import { Track } from './interfaces/Track';
 import { Review } from './interfaces/Review';
 import ReviewModal from './components/ReviewModal';
+//import AuthService from './utils/auth';
+import  getLyrics  from './genius/getLyrics'
 
-// client details for .env
+// client details for .env for the spotify api
 const CLIENT_ID = "b2d05a20bd4941eb9dbb80d3244de974";
 const CLIENT_SECRET = "3abe7e0378a94c2285d4c8a70fda61eb";
+
 
 // searches for 5 tracks according to the search query and returns them as an array of Track objects
 const searchForTrackAPI = async (accessToken: string, searchInput: string) => {
@@ -46,6 +49,9 @@ function TrackSearch() {
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null); // user's selection
   const [showReviewModal, setShowReviewModal] = useState<boolean>(false); // modal visibility
   const [reviews, setReviews] = useState<Review[]>([]); // store reviews
+  // Added by mehdi
+  const [lyrics, setLyrics] = useState<string | null>(null); // store lyrics
+
 
   // Placeholder userId, replace this with actual userId logic
   const userId = 'user123';
@@ -85,6 +91,27 @@ function TrackSearch() {
     if (track) {
       setSelectedTrack(track); // Displays selected track (Testing Reasons)
       setShowReviewModal(true); // Shows modal when track is selected
+
+      // Call for Genius API to get lyrics
+      // try {
+      //   if (trackPick.trackName && trackPick.artistName) {
+      //     console.log(
+      //       "Fetching lyrics for:",
+      //       trackPick.trackName,
+      //       trackPick.artistName
+      //     );
+      //     // const fetchedLyrics = await getLyrics({
+      //     //   // apiKey: GENIUS_API_KEY, // Use your Genius API key here
+      //     //   title: trackPick.trackName,
+      //     //   artist: trackPick.artistName,
+      //     // });
+      //     // setLyrics(fetchedLyrics);
+      //   } else {
+      //     console.error("Track data is incomplete for lyrics fetching.");
+      //   }
+      // } catch (error) {
+      //   console.error("Error fetching lyrics:", error);
+      // }
     }
   };
 
@@ -113,11 +140,18 @@ function TrackSearch() {
           <h3>Search Results</h3>
           <ul>
             {tracks.map((track, index) => (
-              <li key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+              <li
+                key={index}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: "10px",
+                }}
+              >
                 <img
                   src={track.albumImageUrl}
                   alt={`${track.albumName} cover`}
-                  style={{ width: '50px', height: '50px', marginRight: '10px' }}
+                  style={{ width: "50px", height: "50px", marginRight: "10px" }}
                 />
                 <button onClick={() => handleTrackSelection(track)}>
                   {track.trackName} - {track.albumName} by {track.artistName}
@@ -129,11 +163,30 @@ function TrackSearch() {
       )}
 
       {/* Display Selected Track */}
+      {/* Display Selected Track and Lyrics */}
       {selectedTrack && (
         <div>
           <h3>Now Playing:</h3>
-          <p>{selectedTrack.trackName} - {selectedTrack.albumName} by {selectedTrack.artistName}</p>
-          <img src={selectedTrack.albumImageUrl} alt={`${selectedTrack.albumName} cover`} width="50" height="50" />
+          <p>
+            {selectedTrack.trackName} - {selectedTrack.albumName} by{" "}
+            {selectedTrack.artistName}
+          </p>
+          <img
+            src={selectedTrack.albumImageUrl}
+            alt={`${selectedTrack.albumName} cover`}
+            width="50"
+            height="50"
+          />
+          {/* Display Lyrics */}
+          {lyrics ? (
+            <div>
+              <h4>Lyrics:</h4>
+              <p>{lyrics}</p>
+            </div>
+          ): (
+            <p>No lyrics found</p>
+          )
+        }
         </div>
       )}
 
