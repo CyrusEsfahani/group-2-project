@@ -1,20 +1,51 @@
-const forceDatabaseRefresh = false;
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import { expressjwt as jwt } from "express-jwt"; // Corrected import for express-jwt
+import dotenv from "dotenv";
+import jwksRsa from "jwks-rsa";
+import routes from "./routes/index.js";
 
-import express from 'express';
-import sequelize from './config/connection.js';
-import routes from './routes/index.js';
-
+dotenv.config();
+// Create Express app
 const app = express();
-const PORT = process.env.PORT || 3001;
 
-// Serves static files in the entire client's dist folder
-app.use(express.static('../client/dist'));
+// Apply CORS middleware
+app.use(cors());
 
-app.use(express.json());
+// Parse incoming request bodies in JSON and URL-encoded formats
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(routes);
 
-sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-  });
+// Middleware for checking JWT tokens
+// const checkJwt = jwt({
+//   secret: jwksRsa.expressJwtSecret({
+//     cache: true,
+//     rateLimit: true,
+//     jwksRequestsPerMinute: 5,
+//     jwksUri: "https://{yourDomain}/.well-known/jwks.json",
+//   }),
+//   audience: "{YOUR_API_IDENTIFIER}",
+//   issuer: "https://{yourDomain}/",
+//   algorithms: ["RS256"],
+// });
+
+// API endpoint that uses the JWT middleware
+// app.post("/timesheets", checkJwt, (req, res) => {
+//   const timesheet = req.body;
+//   res.status(201).send(timesheet);
+// });
+
+// Start the server
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
+
+// Express JWT: Add email to access token
+export const onExecutePostLogin = async (event, api) => {
+  const namespace = "https://my-app.example.com";
+  api.accessToken.setCustomClaim(`${namespace}/email`, event.user.email);
+};
