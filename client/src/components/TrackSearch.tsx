@@ -53,31 +53,50 @@ function TrackSearch({ onClose }: TrackSearchProps) {
   };
 
   return (
-    <div className="App">
-      <form onSubmit={(event) => searchForTrack(event)}>
+    <div>
+      <form onSubmit={(event) => searchForTrack(event)} className="max-w-md mx-auto flex items-center">
+        <label htmlFor="track-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <input
           type="text"
+          id="track-search"
           value={searchInput}
+          className="block w-full p-2.5 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Enter a track name"
           onChange={(e) => setSearchInput(e.target.value)}
+          required
         />
-        <button type="submit">Search</button>
+        <button
+          type="submit"
+          className="ml-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Search
+        </button>
       </form>
 
       {tracks.length > 0 && (
-        <div>
-          <h3>Search Results</h3>
+        <div className="flex flex-col gap-4 mx-auto p-4 max-w-lg">
+          <h3 className="text-lg font-semibold text-gray-200">Search Results</h3>
           <ul>
             {tracks.map((track, index) => (
-              <li key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+              <li
+                key={index}
+                onClick={() => handleTrackSelection(track)}  // Now the entire card is clickable
+                className="flex items-center p-3 mb-3 bg-gray-700 rounded-lg shadow-md hover:bg-gray-600 cursor-pointer"
+              >
+                {/* Track Image */}
                 <img
                   src={track.albumImageUrl}
                   alt={`${track.albumName} cover`}
-                  style={{ width: '50px', height: '50px', marginRight: '10px' }}
+                  className="w-12 h-12 rounded-lg object-cover mr-4"
                 />
-                <button onClick={() => handleTrackSelection(track)}>
-                  {track.trackName} - {track.albumName} by {track.artistName}
-                </button>
+
+                {/* Track Info */}
+                <div className="flex-1">
+                  <h4 className="text-sm font-semibold text-white">{track.trackName}</h4>
+                  <p className="text-xs text-gray-300">
+                    {track.albumName} by {track.artistName}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>
