@@ -43,6 +43,8 @@ app.use(routes);
 //   res.status(201).send(timesheet);
 // });
 
+import * as db from "./models/index.js";
+
 // Start the server
 const PORT = process.env.PORT || 3001;
 
@@ -53,7 +55,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-sequelize.sync().then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });

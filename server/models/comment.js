@@ -1,7 +1,7 @@
-const { DataTypes, Model } = require("sequelize");
-const sequelize = require("../db/connection.js");
-const User = require("./user");
-const Post = require("./post");
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../db/connection.js";
+import User from "./user.js";
+import Post from "./post.js";
 
 class Comment extends Model {}
 
@@ -31,4 +31,4 @@ Comment.init(
 Comment.belongsTo(User, { foreignKey: "userId" });
 Comment.belongsTo(Post, { foreignKey: "postId" });
 
-module.exports = Comment;
+export default Comment;

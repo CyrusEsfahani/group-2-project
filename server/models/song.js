@@ -1,12 +1,13 @@
-const { DataTypes, Model } = require("sequelize");
-const sequelize = require("../db/connection.js");
+
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../db/connection.js";
 
 class Song extends Model {}
 
 Song.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    songId: { type: DataTypes.STRING, allowNull: false }, // external song id
+    songId: { type: DataTypes.INTEGER, allowNull: false }, // external song id
     trackName: { type: DataTypes.STRING, allowNull: false },
     artistName: { type: DataTypes.STRING, allowNull: false },
     albumName: { type: DataTypes.STRING, allowNull: true },
@@ -21,5 +22,4 @@ Song.init(
   }
 );
 
-module.exports = Song;
-
+export default Song;
