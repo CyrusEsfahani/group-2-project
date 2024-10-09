@@ -3,9 +3,13 @@
 // //import searchSong from '../../client/src/genius/searchSong.js';
 // import songById from '../../client/src/genius/songById.js';
 // import sequelize from '../config/connection.js';
-import User from './user.js';
+// import User from './user.js';
+//import Song from './song.js';
+//User.hasMany(Song, { foreignKey: 'userId' });
+//Song.belongsTo(User, { foreignKey: 'userId' });
 
-export { User };
+
+// export default { User };
 // export { getLyrics };
 // export {getSong};
 // export {searchSong};
