@@ -14,7 +14,7 @@ const Login: React.FC = () => {
     try {
       await axios.post('/auth/login', { email, password });
       setIsLoggedIn(true);
-      navigate('/');
+      navigate('/home'); // Redirecting to the home page after login
     } catch (error) {
       console.error('Error logging in:', error);
     }

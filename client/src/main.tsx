@@ -14,6 +14,10 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        index: true, // This is the default route, now set to Login
+        element: <Login />,
+      },
+      {
         path: "/login",
         element: <Login />,
       },
@@ -22,7 +26,7 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        index: true,
+        path: "/home", // The home path
         element: <Home />,
       },
       {
@@ -31,14 +35,12 @@ const router = createBrowserRouter([
       },
     ],
   },
-]); 
-
+]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-  <UserProvider>
-   <RouterProvider router={router} />
-  </UserProvider>
- 
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </StrictMode>
 );

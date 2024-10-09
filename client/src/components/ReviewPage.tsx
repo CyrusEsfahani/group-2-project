@@ -30,11 +30,11 @@ const ReviewPage = () => {
     console.log("Song playerUri: " + track.playerUri);
     console.log("Song albumImageUrl: " + track.albumImageUrl);
     // Handle storing the review, e.g., update state or API call
-    navigate('/'); // Redirect back to home after submitting
+    navigate('/home'); // Redirect back to home after submitting
   };
 
   const handleCancel = () => {
-    navigate('/'); // Redirect back to home if review is canceled
+    navigate('/home'); // Redirect back to home if review is canceled
   };
 
   const handleRatingClick = (rate: number) => {
