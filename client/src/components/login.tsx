@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext.tsx';
+import Auth from "../utils/auth.ts";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -12,8 +13,9 @@ const Login: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('/auth/login', { email, password });
+      const data = await axios.post('/auth/login', { email, password });
       setIsLoggedIn(true);
+      Auth.login(data.data.token);
       navigate('/home'); // Redirecting to the home page after login
     } catch (error) {
       console.error('Error logging in:', error);

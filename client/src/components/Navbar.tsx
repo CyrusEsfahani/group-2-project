@@ -1,9 +1,15 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { UserContext } from '../context/UserContext.tsx';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext.tsx";
+import Auth from "../utils/auth.ts";
 
 const Navbar: React.FC = () => {
-  const { isLoggedIn } = useContext(UserContext);
+  // const { isLoggedIn } = useContext(UserContext);
+
+  // console.log("isLoggedIn:", isLoggedIn);
+
+  const isLoggedIn = Auth.loggedIn();
+  console.log("isLoggedIn:", isLoggedIn);
 
   return (
     <nav className="bg-gray-800 p-4">

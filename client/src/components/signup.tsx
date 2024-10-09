@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Auth from '../utils/auth.ts';
 
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -11,8 +12,10 @@ const SignUp: React.FC = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('/api/signup', { email, password, username });
-      navigate('/');
+      const data = await axios.post('/auth/signup', { email, password, username });
+      console.log(data);
+      Auth.login(data.data.token);
+      navigate('/home');
     } catch (error) {
       console.error('Error signing up:', error);
     }
