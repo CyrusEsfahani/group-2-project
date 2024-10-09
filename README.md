@@ -33,7 +33,7 @@ To get started with **MelodyHub**, follow these steps:
 2. **Login or Create a New Account**:  
    If you have used **MelodyHub** before, please log in with your credentials. If you are new, create an account using your desired username, email, and password.
 
-   ![Login Screen](**Insert Image Here**)  
+   ![Login Screen](.\public\login.png)  
    ![New User Screen](**Insert Image Here**)
 
    After completing these steps, welcome to **MelodyHub**!
@@ -54,8 +54,8 @@ After logging in, you will land on **MelodyHub's** homepage. If you’ve used th
    Continue using **MelodyHub** to catalog your favorite (and perhaps not-so-favorite) songs!
 
    ![Home Screen](**Insert Image Here**)  
-   ![Search Modal](**Insert Image Here**)  
-   ![Review Page](**Insert Image Here**)
+   ![Search Modal](./public/searchModal.png)  
+   ![Review Page](./public/reviewPage.png)
 
 ## Contributing
 
