@@ -5,20 +5,9 @@ function App() {
   // Check if the user is logged in using AuthService
   const isLoggedIn = AuthService.loggedIn();
 
-
   return (
-    
     <>
-      <nav>
-        {!isLoggedIn ? (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </>
-        ) : (
-          <button onClick={() => AuthService.logout()}>Logout</button> // Show logout button when logged in
-        )}
-      </nav>
+          <button onClick={() => AuthService.logout()}>Logout</button> 
       <Outlet />
     </>
   );
