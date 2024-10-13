@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Review } from '../interfaces/Review';
 import ExtractLyrics from './extractLyrics';
@@ -11,15 +11,19 @@ const ReviewPage = () => {
   const [rating, setRating] = useState<number>(1);
   const [comment, setComment] = useState<string>('');
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const review: Review = {
-      userId: 'user123', // Placeholder, use actual logic for userId
-      songId: track.id,
+      trackId: track.id,
+      trackName: track.trackName,
+      albumName: track.albumName,
+      artistName: track.artistName, 
+      albumImageUrl: track.albumImageUrl,
+      playerUri: track.playerUri,
       rating: rating,
       comment: comment,
     };
-    console.log("Review userId: " + review.userId);
-    console.log("Review songId: " + review.songId);
+    // console.log("Review userId: " + review.userId);
+    // console.log("Review songId: " + review.songId);
     console.log("Review rating: " + review.rating);
     console.log("Review comment: " + review.comment);
     console.log("");
@@ -31,6 +35,14 @@ const ReviewPage = () => {
     //console.log("Song playerUri: " + track.playerUri); not needed
     console.log("Song albumImageUrl: " + track.albumImageUrl);
     // Handle storing the review, e.g., update state or API call
+    await fetch('/api/reviews/post', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('id_token')}`,
+      },
+      body: JSON.stringify(review),
+    });
     navigate('/home'); // Redirect back to home after submitting
   };
 

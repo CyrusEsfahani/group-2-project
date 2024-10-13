@@ -7,7 +7,7 @@ class Song extends Model {}
 Song.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    songId: { type: DataTypes.INTEGER, allowNull: false }, // external song id
+    trackId: { type: DataTypes.STRING, allowNull: false }, // external song id
     trackName: { type: DataTypes.STRING, allowNull: false },
     artistName: { type: DataTypes.STRING, allowNull: false },
     albumName: { type: DataTypes.STRING, allowNull: true },

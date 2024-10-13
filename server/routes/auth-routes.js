@@ -33,7 +33,7 @@ export const signup = async (req, res) => {
   try {
     const newUser = await User.create({ username, email, password });
 
-    const token = jwt.sign({ id: newUser.id, username }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: newUser.id, username }, process.env.JWT_SECRET, { expiresIn: "8h" });
     res.status(201).json({ token });
   } catch (error) {
     res.status(400).json({ message: error.message });

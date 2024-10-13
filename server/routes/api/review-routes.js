@@ -1,6 +1,7 @@
 import express from "express";
 import axios from "axios";
-//import { Song } from "../../models/index.js";
+import { Song, Post } from "../../models/index.js";
+
 const router = express.Router();
 
 const fetch_lyrics = async (title, artist) => {
@@ -40,17 +41,18 @@ router.post('/lyrics', async (req, res) => {
   res.json({ lyrics });
 });
 
-router.post('/history', async (req, res)=>{
-    try {
-        const song = await Song.create({...req.body, userId: req.user.id, songId: req.body.id});
-        res.json(song);
 
+router.post('/post', async (req, res) => {
+    try{
+      const song = await Song.create({...req.body, userId: req.user.id});
+        const post = await Post.create({...req.body, userId: req.user.id, songId: song.id});
+        res.json(post);
     } catch (error) {
         console.error(error.message);
         res.status(500).json({message: 'Server error'});
     }
-}
-)
+  });
+
 
 export default router;
 
