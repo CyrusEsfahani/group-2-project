@@ -21,6 +21,7 @@ Post.init(
     rating: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 1,
       validate: { min: 1, max: 5 },
     },
     comment: { type: DataTypes.TEXT, allowNull: true },
@@ -33,7 +34,5 @@ Post.init(
   }
 );
 
-Post.belongsTo(User, { foreignKey: "userId" });
-Post.belongsTo(Song, { foreignKey: "songId" });
 
 export default Post;

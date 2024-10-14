@@ -1,6 +1,10 @@
 export interface Review {
-    userId: string;
-    songId: string;
-    rating: number;
-    comment: string;
+  trackId: string;
+  trackName: string;
+  albumName: string | null;
+  artistName: string; 
+  albumImageUrl: string | null;
+  playerUri: string | null;
+  rating: number;
+  comment: string | null;
   }
