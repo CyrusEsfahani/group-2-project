@@ -13,6 +13,7 @@ Song.init(
     albumName: { type: DataTypes.STRING, allowNull: true },
     albumImageUrl: { type: DataTypes.STRING, allowNull: true },
     playerUri: { type: DataTypes.STRING, allowNull: true }, // e.g., Spotify URI
+    lyricsUrl: { type: DataTypes.STRING, allowNull: true },
   },
   {
     sequelize,

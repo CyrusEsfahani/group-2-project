@@ -1,5 +1,6 @@
 import  User  from '../../models/user.js';
 import express from 'express';
+import { Post, Song } from '../../models/index.js';
 
 const router = express.Router();
 
@@ -14,6 +15,21 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+router.get('/history', async (req, res) => {
+  try {
+    const posts = await Post.findAll({
+      where: { userId: req.user.id },
+      include: [{ model: Song }]
+    });
+    console.log(posts, "this is from line 25");
+    res.json(posts);
+  } catch (error) {
+    console.error(error.message, "this is from line 28");
+    res.status(500).json({ message: error.message });
+  }
+});
+
 
 // GET /users/:id - Get a user by id
 router.get('/:id', async (req, res) => {
