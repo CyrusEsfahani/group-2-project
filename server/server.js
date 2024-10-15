@@ -3,7 +3,6 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { expressjwt as jwt } from "express-jwt"; // Corrected import for express-jwt
 import dotenv from "dotenv";
-import jwksRsa from "jwks-rsa";
 import routes from "./routes/index.js";
 import sequelize from "./db/connection.js";
 import path from "node:path";
@@ -24,24 +23,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(routes);
 
-// Middleware for checking JWT tokens
-// const checkJwt = jwt({
-//   secret: jwksRsa.expressJwtSecret({
-//     cache: true,
-//     rateLimit: true,
-//     jwksRequestsPerMinute: 5,
-//     jwksUri: "https://{yourDomain}/.well-known/jwks.json",
-//   }),
-//   audience: "{YOUR_API_IDENTIFIER}",
-//   issuer: "https://{yourDomain}/",
-//   algorithms: ["RS256"],
-// });
-
-// API endpoint that uses the JWT middleware
-// app.post("/timesheets", checkJwt, (req, res) => {
-//   const timesheet = req.body;
-//   res.status(201).send(timesheet);
-// });
 
 import * as db from "./models/index.js";
 
