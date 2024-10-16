@@ -1,15 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../context/UserContext.tsx";
 import Auth from "../utils/auth.ts";
+import AuthService from "../utils/auth.ts";
 
 const Navbar: React.FC = () => {
-  // const { isLoggedIn } = useContext(UserContext);
-
-  // console.log("isLoggedIn:", isLoggedIn);
-
   const isLoggedIn = Auth.loggedIn();
-  console.log("isLoggedIn:", isLoggedIn);
 
   return (
     <nav className="bg-gray-800 p-4">
@@ -19,11 +14,14 @@ const Navbar: React.FC = () => {
         </div>
         <div className="flex items-center space-x-4">
           {isLoggedIn && (
-            <input
-              type="text"
-              placeholder="Search songs, lyrics, artists..."
-              className="px-3 py-2 text-gray-900 placeholder-gray-500 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500"
-            />
+            <>
+              <button
+                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md"
+                onClick={() => AuthService.logout()}
+              >
+                Logout
+              </button>
+            </>
           )}
           <Link to="/" className="text-gray-300 hover:text-white">
             Home
