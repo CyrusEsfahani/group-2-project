@@ -28,13 +28,13 @@ Welcome to **MelodyHub**, your ultimate destination for discovering and sharing 
 To get started with **MelodyHub**, follow these steps:
 
 1. **Visit the MelodyHub Website**:  
-   Please follow this link to visit the MelodyHub website: **[Insert Link Here]**
+   Please follow this link to visit the MelodyHub website: https://group-2-project.onrender.com/
 
 2. **Login or Create a New Account**:  
    If you have used **MelodyHub** before, please log in with your credentials. If you are new, create an account using your desired username, email, and password.
 
-   ![Login Screen](.\public\login.png)  
-   ![New User Screen](**Insert Image Here**)
+   ![Login Screen](.\public\login.png)
+   ![Sign Up Screen](.\public\signup.png)  
 
    After completing these steps, welcome to **MelodyHub**!
 
@@ -53,7 +53,7 @@ After logging in, you will land on **MelodyHub's** homepage. If you’ve used th
 
    Continue using **MelodyHub** to catalog your favorite (and perhaps not-so-favorite) songs!
 
-   ![Home Screen](**Insert Image Here**)  
+   ![Home Screen](./public/home.png)  
    ![Search Modal](./public/searchModal.png)  
    ![Review Page](./public/reviewPage.png)
 
@@ -86,5 +86,5 @@ Starter code provided by UCI Software Engineering Boot Camp.
 
 ## Links
 
-- **GitHub Repository**: [Insert Link Here]  
-- **Render Deployment**: [Insert Link Here]
+- **GitHub Repository**: https://github.com/CyrusEsfahani/group-2-project
+- **Render Deployment**: https://group-2-project.onrender.com/
