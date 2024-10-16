@@ -20,7 +20,11 @@ interface HistoryItem {
   };
 }
 
-const HistoryList: React.FC = () => {
+interface HistoryListProps {
+  searchQuery: string; // Receive the search query from parent component
+}
+
+const HistoryList: React.FC<HistoryListProps> = ({ searchQuery }) => {
   const [history, setHistory] = useState<HistoryItem[]>([]);
 
   useEffect(() => {
@@ -38,13 +42,18 @@ const HistoryList: React.FC = () => {
       });
   }, []);
 
+  // Filter history based on search query (trackName, artistName, albumName)
+  const filteredHistory = history.filter((item) =>
+    `${item.song.trackName} ${item.song.artistName} ${item.song.albumName}`
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="flex flex-col items-start pl-6">
-      {/* Align cards to the left with padding */}
-      {history.map((item) => (
-        <div className="max-w-lg w-full mb-4">
-          {/* Restrict width to max lg with margin for spacing */}
-          <HistoryCard key={item.id} historyItem={item} />
+      {filteredHistory.map((item) => (
+        <div className="max-w-lg w-full mb-4" key={item.id}>
+          <HistoryCard historyItem={item} />
         </div>
       ))}
     </div>

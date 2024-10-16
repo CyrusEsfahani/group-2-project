@@ -1,17 +1,22 @@
-import { Outlet, Link } from "react-router-dom";
-import AuthService from "./utils/auth.ts"; // Import your auth service
-import Navbar from "./components/Navbar.tsx";
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
 function App() {
-  // Check if the user is logged in using AuthService
-  const isLoggedIn = AuthService.loggedIn();
+  // Define the search query state
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Function to handle search input
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
 
   return (
-    <>
+    <div>
+      {/* Pass the handleSearch function as onSearch prop */}
       <Navbar />
-      <button onClick={() => AuthService.logout()}>Logout</button>
       <Outlet />
-    </>
+    </div>
   );
 }
 
