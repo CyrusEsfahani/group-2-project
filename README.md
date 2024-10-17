@@ -33,8 +33,8 @@ To get started with **MelodyHub**, follow these steps:
 2. **Login or Create a New Account**:  
    If you have used **MelodyHub** before, please log in with your credentials. If you are new, create an account using your desired username, email, and password.
 
-   ![Login Screen](.\public\login.png)
-   ![Sign Up Screen](.\public\signup.png)  
+   ![Login Screen](./public/login.png)
+   ![Sign Up Screen](./public/signup.png)  
 
    After completing these steps, welcome to **MelodyHub**!
 
